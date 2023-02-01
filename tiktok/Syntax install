@@ -17,3 +17,7 @@
 # reset css
 
 -   install normailize: npm install --save normalize.css
+
+# router dom
+
+-   install react route dom: npm i react-router-dom
