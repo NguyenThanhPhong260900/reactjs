@@ -1,2 +1,5 @@
 # create react app 
 - install react app: npx create react app myName
+
+# custom-cra customize webpack config
+-   install customize-cra: npm i customize-cra react-app-rewired -D
