@@ -21,3 +21,18 @@
 # router dom
 
 -   install react route dom: npm i react-router-dom
+
+# classNames dùng để chuyển đổi styles class html
+
+-   install classNames: npm i classnames
+
+# fontawesome plugin
+
+-- package.json -> dependencies
+"@fortawesome/fontawesome-svg-core": "^1.3.0",
+"@fortawesome/free-brands-svg-icons": "^6.0.0",
+"@fortawesome/free-regular-svg-icons": "^6.0.0",
+"@fortawesome/free-solid-svg-icons": "^6.0.0",
+"@fortawesome/react-fontawesome": "^0.1.17",
+
+-   install fontAwesome: npm i
