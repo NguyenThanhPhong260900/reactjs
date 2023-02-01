@@ -36,3 +36,7 @@
 "@fortawesome/react-fontawesome": "^0.1.17",
 
 -   install fontAwesome: npm i
+
+# thư viện tippy
+
+-   install tippy: npm i @tippyjs/react
