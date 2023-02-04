@@ -1,0 +1,27 @@
+// menu wrapper
+.menu-items {
+    width: 224px;
+
+    .menu-item {
+        margin-left: 0;
+    }
+}
+
+.menu-item {
+    width: 100%;
+    height: 42px;
+    // justify-content: flex-start;
+    padding: 10px 8px 10px 16px;
+    display: inline-block;
+    text-align: left;
+    font-weight: 500;
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
+
+// padding bottom menu items
+.menu-item-padd-bottom {
+    padding-bottom: 8px;
+}
