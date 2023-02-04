@@ -19,6 +19,7 @@ import { Wrapper as PopperWrapper } from '~/component/Popper';
 import AccountItem from '~/component/AccountItem';
 import Button from '~/component/Button';
 import Menu from '~/component/Popper/Menu';
+import MenuItem from '~/component/Popper/Menu/MenuItem';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,36 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faLanguage} />,
         title: 'English',
+        // Menu nhiều cấp (cấp cha)
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Vietnamese',
+                    // ví dụ cho menu có thể nhiều cấp
+                    // children: {
+                    //     title: 'Language',
+                    //     data: [
+                    //         {
+                    //             code: 'en',
+                    //             title: 'English 1',
+                    //         },
+                    //         {
+                    //             code: 'vi',
+                    //             title: 'Vietnamese 1',
+                    //         },
+                    //     ],
+                    // },
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -46,6 +77,17 @@ function Header() {
             setSearchResult([]);
         }, 0);
     }, []);
+
+    // handle logic go here
+    const handleMenuChange = (MenuItem) => {
+        switch (MenuItem.type) {
+            case 'language':
+                // handle change to language
+                break;
+            default:
+        }
+    };
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -95,7 +137,7 @@ function Header() {
                     </Button>
                     <Button primary>Log in</Button>
 
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
