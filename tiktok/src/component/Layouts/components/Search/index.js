@@ -12,14 +12,16 @@ const cx = classNames.bind(styles);
 
 function Search() {
     const [searchValue, setSearchValue] = useState('');
+    const [searchResult, setSearchResult] = useState([]);
     // để mặc định hiển là hiển thị kết quả tìm kiếm
     const [showResult, setShowResult] = useState(true);
-    const [searchResult, setSearchResult] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
     const handleClear = () => {
         setSearchValue('');
+        // setSearchResult([]);
         inputRef.current.focus();
     };
 
@@ -30,11 +32,23 @@ function Search() {
     };
 
     useEffect(() => {
-        setTimeout(() => {
-            // trong mảng có giá trị thì hiển thị accountitem
-            setSearchResult([1, 2]);
-        }, 0);
-    }, []);
+        if (!searchValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
+
+        setLoading(true);
+        // encodeURIComponent dùng để mã hóa các ký tự gây hiểu làm thành các ký tự hợp lệ
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResult(res.data);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            });
+    }, [searchValue]);
 
     return (
         <HeadlesTippy
@@ -46,14 +60,12 @@ function Search() {
                     {/* là phần Wrapper => Popper */}
                     <PopperWrapper>
                         <h5 className={cx('search-title')}>Accounts</h5>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
+                        {searchResult.map((result) => (
+                            <AccountItem key={result.id} data={result} />
+                        ))}
                     </PopperWrapper>
                 </div>
             )}
-            // khi click ra ngoài thì nó sẽ ẩn đi kết quả tìm kiếm
             onClickOutside={handleHideResult}
         >
             {/* Search*/}
@@ -75,7 +87,7 @@ function Search() {
                 {/* khi không có giá trị trong input thi icon clear sẽ ẩn */}
                 {/* Nếu có giá trị thì hiển thị button icon close */}
                 {/* khi click vào icon clear thì nó sẽ hiển xóa hết giá trị và hiển thị chuỗi rỗng */}
-                {!!searchValue && (
+                {!!searchValue && !loading && (
                     <button
                         className={cx('clear')}
                         // Sử dụng trực tiếp
@@ -92,9 +104,9 @@ function Search() {
                 )}
 
                 {/* icon loading */}
-                {/* <button type="" className={cx('loading')}>
-                    <FontAwesomeIcon icon={faSpinner} />
-                </button> */}
+                <button type="" className={cx('loading')}>
+                    {loading && <FontAwesomeIcon icon={faSpinner} />}
+                </button>
 
                 {/* search-btn */}
                 <button type="" className={cx('search-btn')}>
