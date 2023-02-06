@@ -1,3 +1,11 @@
+// padding bottom menu items
+.menu-item-padd-bottom {
+    padding-bottom: 8px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
 // menu wrapper
 .menu-items {
     width: 224px;
@@ -16,14 +24,13 @@
     text-align: left;
     font-weight: 500;
 
+    &.separate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+    }
+
     &:hover {
         background: rgba(22, 24, 35, 0.03);
     }
-}
-
-// padding bottom menu items
-.menu-item-padd-bottom {
-    padding-bottom: 8px;
 }
 
 // Header
