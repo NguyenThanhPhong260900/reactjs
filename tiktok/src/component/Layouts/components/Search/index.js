@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Wrapper as PopperWrapper } from '~/component/Popper';
 import AccountItem from '~/component/AccountItem';
 import { SearchIcon } from '~/component/Icons';
+import { useDebounce } from '~/Hook';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +17,9 @@ function Search() {
     // để mặc định hiển là hiển thị kết quả tìm kiếm
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
+
+    // b1: debounced = " "
+    const debounced = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
@@ -32,14 +36,14 @@ function Search() {
     };
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
 
         setLoading(true);
         // encodeURIComponent dùng để mã hóa các ký tự gây hiểu làm thành các ký tự hợp lệ
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
             .then((res) => res.json())
             .then((res) => {
                 setSearchResult(res.data);
@@ -48,7 +52,7 @@ function Search() {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    }, [debounced]);
 
     return (
         <HeadlesTippy
