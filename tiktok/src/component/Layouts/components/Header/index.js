@@ -3,30 +3,23 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import {
     faCircleQuestion,
-    faCircleXmark,
-    // faCloudUpload,
     faCoins,
     faEllipsisVertical,
     faGear,
     faKeyboard,
     faLanguage,
-    faMagnifyingGlass,
     faPlus,
     faSignOut,
-    faSpinner,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import HeadlesTippy from '@tippyjs/react/headless';
-import { useEffect, useState } from 'react';
-import { Wrapper as PopperWrapper } from '~/component/Popper';
-import AccountItem from '~/component/AccountItem';
 import Button from '~/component/Button';
 import Menu from '~/component/Popper/Menu';
 import { InboxIcon, MessageIcon } from '~/component/Icons';
 import Image from '~/Image';
+import Search from '../Search';
 
 const cx = classNames.bind(styles);
 
@@ -108,14 +101,6 @@ const userMenu = [
 ];
 function Header() {
     const currentUser = true;
-    const [searchResult, setSearchResult] = useState([]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            // trong mảng có giá trị thì hiển thị accountitem
-            setSearchResult([]);
-        }, 0);
-    }, []);
 
     // handle logic go here
     const handleMenuChange = (MenuItem) => {
@@ -130,46 +115,14 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                {/* Images Logo*/}
+                {/* Images Logo Header*/}
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="tiktok" />
                 </div>
-                <HeadlesTippy
-                    visible={searchResult.length > 0}
-                    interactive
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            {/* là phần Wrapper => Popper */}
-                            <PopperWrapper>
-                                <h5 className={cx('search-title')}>Accounts</h5>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    {/* Search*/}
-                    <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" spellCheck={false} />
-                        {/* icon close */}
-                        <button className={cx('close')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        {/* icon loading */}
-                        <button type="" className={cx('loading')}>
-                            <FontAwesomeIcon icon={faSpinner} />
-                        </button>
-                        {/* search-btn */}
+                {/* Search Header */}
+                <Search />
 
-                        <button type="" className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlesTippy>
-
-                {/* Actions */}
+                {/* Actions Header */}
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
@@ -206,7 +159,6 @@ function Header() {
                                 className={cx('user-avatar')}
                                 src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/1fe95a4260a3dd0135851dfaaca9ad7c~c5_100x100.jpeg?x-expires=1675670400&x-signature=mthF1xkgRw0vg6B%2FCPsS3Ah3XSc%3D"
                                 alt="Phong"
-                                fallback=""
                             />
                         ) : (
                             <button className={cx('more-btn')}>
