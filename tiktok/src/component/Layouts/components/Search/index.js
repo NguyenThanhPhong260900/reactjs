@@ -73,6 +73,16 @@ function Search() {
         fetchApi();
     }, [debounced]);
 
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+
+    const handleSubmit = (e) => {};
+
     return (
         <HeadlesTippy
             // Khi thỏa thuận của 2 điều kiện thì mới hiển thị tìm kiếm
@@ -100,7 +110,7 @@ function Search() {
                     // tắt gạch chân trong ô tìm kiếm
                     spellCheck={false}
                     // Lưu lại giá trị khi tìm kiếm
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     // khi bấm vào ô tìm kiếm thì lại hiển thị kết quả tìm kiếm
                     onFocus={() => setShowResult(true)}
                 />
@@ -132,7 +142,7 @@ function Search() {
                 </button>
 
                 {/* search-btn */}
-                <button type="" className={cx('search-btn')}>
+                <button type="" className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
                     <SearchIcon />
                 </button>
             </div>

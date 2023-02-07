@@ -9,8 +9,8 @@ import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 const defaultFn = () => {};
-
-function Menu({ children, items = [], onChange = defaultFn }) {
+// hideOnClick mặc định là true khi click vào avatar thì nó sẽ tự ẩn => thay đổi thành false để không bị ẩn
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -41,6 +41,8 @@ function Menu({ children, items = [], onChange = defaultFn }) {
             offset={[12, 8]}
             interactive
             delay={[0, 700]}
+            // khi click vào thì nó không bị ẩn
+            hideOnClick={hideOnClick}
             render={(attrs) => (
                 <div className={cx('menu-items')} tabIndex="-1" {...attrs}>
                     {/* là phần Wrapper => Popper */}
