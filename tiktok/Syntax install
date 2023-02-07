@@ -40,3 +40,7 @@
 # thư viện tippy
 
 -   install tippy: npm i @tippyjs/react
+
+# thư viện axios
+
+-   install axios: $ npm install axios
