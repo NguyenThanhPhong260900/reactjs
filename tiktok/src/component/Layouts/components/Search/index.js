@@ -81,72 +81,74 @@ function Search() {
         }
     };
 
-    const handleSubmit = (e) => {};
-
     return (
-        <HeadlesTippy
-            // Khi thỏa thuận của 2 điều kiện thì mới hiển thị tìm kiếm
-            visible={showResult && searchResult.length > 0}
-            interactive
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    {/* là phần Wrapper => Popper */}
-                    <PopperWrapper>
-                        <h5 className={cx('search-title')}>Accounts</h5>
-                        {searchResult.map((result) => (
-                            <AccountItem key={result.id} data={result} />
-                        ))}
-                    </PopperWrapper>
-                </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            {/* Search*/}
-            <div className={cx('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search accounts and videos"
-                    // tắt gạch chân trong ô tìm kiếm
-                    spellCheck={false}
-                    // Lưu lại giá trị khi tìm kiếm
-                    onChange={handleChange}
-                    // khi bấm vào ô tìm kiếm thì lại hiển thị kết quả tìm kiếm
-                    onFocus={() => setShowResult(true)}
-                />
-
-                {/* Button Icon clear */}
-                {/* ############ Logic Search ############ */}
-                {/* khi không có giá trị trong input thi icon clear sẽ ẩn */}
-                {/* Nếu có giá trị thì hiển thị button icon close */}
-                {/* khi click vào icon clear thì nó sẽ hiển xóa hết giá trị và hiển thị chuỗi rỗng */}
-                {!!searchValue && !loading && (
-                    <button
-                        className={cx('clear')}
-                        // Sử dụng trực tiếp
-                        // onClick={() => {
-                        //     setSearchValue('');
-                        //     inputRef.current.focus();
-                        // }}
-
-                        // Tái sử dụng
-                        onClick={handleClear}
-                    >
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
+        //Using a wrapper <div> or <span> tag around the reference element solves this by creating a new parentNode context.
+        <div>
+            <HeadlesTippy
+                // Khi thỏa thuận của 2 điều kiện thì mới hiển thị tìm kiếm
+                visible={showResult && searchResult.length > 0}
+                interactive
+                // appendTo={() => document.body}
+                render={(attrs) => (
+                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                        {/* là phần Wrapper => Popper */}
+                        <PopperWrapper>
+                            <h5 className={cx('search-title')}>Accounts</h5>
+                            {searchResult.map((result) => (
+                                <AccountItem key={result.id} data={result} />
+                            ))}
+                        </PopperWrapper>
+                    </div>
                 )}
+                onClickOutside={handleHideResult}
+            >
+                {/* Search*/}
+                <div className={cx('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Search accounts and videos"
+                        // tắt gạch chân trong ô tìm kiếm
+                        spellCheck={false}
+                        // Lưu lại giá trị khi tìm kiếm
+                        onChange={handleChange}
+                        // khi bấm vào ô tìm kiếm thì lại hiển thị kết quả tìm kiếm
+                        onFocus={() => setShowResult(true)}
+                    />
 
-                {/* icon loading */}
-                <button type="" className={cx('loading')}>
-                    {loading && <FontAwesomeIcon icon={faSpinner} />}
-                </button>
+                    {/* Button Icon clear */}
+                    {/* ############ Logic Search ############ */}
+                    {/* khi không có giá trị trong input thi icon clear sẽ ẩn */}
+                    {/* Nếu có giá trị thì hiển thị button icon close */}
+                    {/* khi click vào icon clear thì nó sẽ hiển xóa hết giá trị và hiển thị chuỗi rỗng */}
+                    {!!searchValue && !loading && (
+                        <button
+                            className={cx('clear')}
+                            // Sử dụng trực tiếp
+                            // onClick={() => {
+                            //     setSearchValue('');
+                            //     inputRef.current.focus();
+                            // }}
 
-                {/* search-btn */}
-                <button type="" className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
-                    <SearchIcon />
-                </button>
-            </div>
-        </HeadlesTippy>
+                            // Tái sử dụng
+                            onClick={handleClear}
+                        >
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
+
+                    {/* icon loading */}
+                    <button type="" className={cx('loading')}>
+                        {loading && <FontAwesomeIcon icon={faSpinner} />}
+                    </button>
+
+                    {/* search-btn */}
+                    <button type="" className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+                        <SearchIcon />
+                    </button>
+                </div>
+            </HeadlesTippy>
+        </div>
     );
 }
 
