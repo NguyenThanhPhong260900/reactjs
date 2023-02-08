@@ -18,7 +18,7 @@ import 'tippy.js/dist/tippy.css';
 import Button from '~/component/Button';
 import Menu from '~/component/Popper/Menu';
 import { InboxIcon, MessageIcon } from '~/component/Icons';
-import Image from '~/image';
+import Image from '~/component/Image';
 import Search from '../Search';
 import { Link } from 'react-router-dom';
 import config from '~/config';

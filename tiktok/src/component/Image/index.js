@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { useState, forwardRef } from 'react';
 import images from '~/assets/images';
 import styles from './Image.module.scss';
+import PropTypes from 'prop-types';
 
 /*
     tham so fallback:   + khong truyen fallback tu ngoai vao thi no lay images.noImage
@@ -25,5 +26,12 @@ const Image = forwardRef(({ src, alt, className, fallback: customFallback = imag
         />
     );
 });
+
+Image.propTypes = {
+    className: PropTypes.string,
+    fallback: PropTypes.string,
+    src: PropTypes.string,
+    alt: PropTypes.string,
+};
 
 export default Image;
