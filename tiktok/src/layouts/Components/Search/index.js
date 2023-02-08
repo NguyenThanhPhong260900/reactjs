@@ -7,9 +7,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Wrapper as PopperWrapper } from '~/component/Popper';
 import AccountItem from '~/component/AccountItem';
 import { SearchIcon } from '~/component/Icons';
-import { useDebounce } from '~/Hook';
-// import * as request from '~/utils/request';
-import * as searchServices from '~/apiServices/searchServices';
+import { useDebounce } from '~/hook';
+// import * as httpRequest from '~/utils/httpRequest';
+import * as searchServices from '~/services/searchServices';
 
 const cx = classNames.bind(styles);
 
@@ -49,7 +49,7 @@ function Search() {
         // chay binh thuong khong loi
         // const fetchApi = async () => {
         //     try {
-        //         const res = await request.get(`users/search`, {
+        //         const res = await httpRequest.get(`users/search`, {
         //             params: {
         //                 q: debounced,
         //                 type: 'less',

@@ -1,4 +1,4 @@
-import Header from '.';
+import Header from './index';
 
 function HeaderOnly({ children }) {
     return (
